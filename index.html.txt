@@ -1,0 +1,434 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>종현이 성기 키우기 - 하드코어</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #0b0b12;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #161622;
+            border: 2px solid #ffaa00;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #ffaa00;
+            text-align: center;
+            margin: 0 0 12px 0;
+            text-shadow: 0 0 12px rgba(255, 170, 0, 0.8), 2px 2px 4px #000000;
+            letter-spacing: -1px;
+        }
+
+        .title-image {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ffaa00;
+            margin-bottom: 12px;
+            object-fit: cover;
+        }
+
+        .length-display {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+            margin-bottom: 2px;
+        }
+
+        .stats-display {
+            font-size: 0.85rem;
+            color: #ffaa00;
+            margin-bottom: 12px;
+        }
+
+        .bar-container {
+            width: 100px;
+            height: 250px;
+            background: #0a0a10;
+            border: 2px solid #333;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 6px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flesh-bar {
+            width: 48px;
+            height: 1px;
+            background: linear-gradient(180deg, #ffd1b3 0%, #ffb380 100%);
+            border-radius: 24px 24px 6px 6px;
+            box-shadow: 0 0 12px rgba(255, 179, 128, 0.8);
+            transition: height 0.03s ease-out;
+        }
+
+        .click-btn {
+            width: 100%;
+            height: 58px;
+            background: linear-gradient(180deg, #ff9900 0%, #cc7700 100%);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.4);
+            touch-action: manipulation;
+            transition: transform 0.02s, background 0.1s;
+            margin-bottom: 12px;
+        }
+
+        .click-btn:active {
+            transform: scale(0.95);
+            background: linear-gradient(180deg, #e68a00 0%, #b36600 100%);
+        }
+
+        .shop {
+            width: 100%;
+            max-height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid #333;
+            padding-top: 12px;
+            padding-right: 4px;
+        }
+
+        .shop::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .shop::-webkit-scrollbar-thumb {
+            background: #ffaa00;
+            border-radius: 3px;
+        }
+
+        .upgrade-btn {
+            width: 100%;
+            background: #222233;
+            border: 1px solid #ffaa00;
+            border-radius: 6px;
+            color: #ffffff;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .upgrade-btn:disabled {
+            border-color: #444;
+            color: #666;
+            background: #11111a;
+            cursor: not-allowed;
+        }
+
+        .upgrade-info {
+            text-align: left;
+        }
+
+        .upgrade-sub {
+            font-size: 0.75rem;
+            color: #ffaa00;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .upgrade-btn:disabled .upgrade-sub {
+            color: #666;
+        }
+
+        .celebration-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .celebration-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .celebration-box {
+            background: #1e1e2f;
+            border: 3px solid #ffaa00;
+            border-radius: 12px;
+            padding: 20px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 0 30px #ffaa00;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .celebration-overlay.active .celebration-box {
+            transform: scale(1);
+        }
+
+        .celebration-title {
+            color: #ffcc00;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .celebration-msg {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .celebration-close {
+            background: #ffaa00;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="main-title">종현이 성기 키우기</h1>
+
+    <img src="title.png" alt="종현이 성기 키우기" class="title-image" onerror="this.style.display='none'">
+
+    <div class="length-display" id="lengthDisplay">0 mm</div>
+    <div class="stats-display" id="statsDisplay">(클릭당: +0.1 mm | 초당: +0 mm)</div>
+
+    <div class="bar-container">
+        <div class="flesh-bar" id="fleshBar"></div>
+    </div>
+
+    <button class="click-btn" id="clickBtn">키우기 (클릭!)</button>
+
+    <div class="shop" id="shopContainer"></div>
+</div>
+
+<div class="celebration-overlay" id="celebrationOverlay">
+    <div class="celebration-box">
+        <div class="celebration-title">🎉 종현이의 대환호! 🎉</div>
+        <div class="celebration-msg" id="celebrationMsg">종현이가 기뻐합니다!</div>
+        <button class="celebration-close" onclick="closeCelebration()">계속 키우기</button>
+    </div>
+</div>
+
+<script>
+    let lengthInMm = 0;
+    let baseClickGrowth = 0.1; // 기본 클릭량 극소화 (0.1mm)
+
+    // 하드코어 100개 업그레이드 생성
+    const upgrades = [];
+    let baseCost = 50;
+    let baseAmount = 0.1;
+
+    for (let i = 1; i <= 100; i++) {
+        const isClickUpgrade = (i % 2 === 0);
+        upgrades.push({
+            id: i,
+            type: isClickUpgrade ? 'click' : 'auto',
+            cost: Math.floor(baseCost),
+            value: Number(baseAmount.toFixed(2)),
+            count: 0
+        });
+        
+        // 비용과 수치의 성장률 기하급수적 인상
+        baseCost *= 1.85;
+        baseAmount *= 1.25;
+    }
+
+    // 더욱 가혹해진 단위 목표치
+    const unitTiers = [
+        { limit: 100, msg: "⚡ [10cm 돌파] 종현이: \"드디어 10cm 달성! 피나는 노력의 결실이다!\"" },
+        { limit: 10000, msg: "🔥 [10m 돌파] 종현이: \"건물 3층 높이까지 키워냈다!! 승리했다!!\"" },
+        { limit: 10000000, msg: "🚀 [10km 돌파] 종현이: \"성층권을 뚫었다! 한계를 뛰어넘었다!!\"" },
+        { limit: 100000000000, msg: "🌌 [1광년 돌파] 종현이: \"지옥 같은 난이도를 뚫고 우주를 지배했다!!\"" }
+    ];
+    let currentTierIndex = 0;
+
+    const lengthDisplay = document.getElementById('lengthDisplay');
+    const statsDisplay = document.getElementById('statsDisplay');
+    const fleshBar = document.getElementById('fleshBar');
+    const clickBtn = document.getElementById('clickBtn');
+    const shopContainer = document.getElementById('shopContainer');
+    const celebrationOverlay = document.getElementById('celebrationOverlay');
+    const celebrationMsg = document.getElementById('celebrationMsg');
+
+    function formatLength(mm) {
+        if (mm < 10) return mm.toFixed(1) + " mm";
+        if (mm < 1000) return (mm / 10).toFixed(2) + " cm";
+        if (mm < 1000000) return (mm / 1000).toFixed(2) + " m";
+        if (mm < 1000000000) return (mm / 1000000).toFixed(2) + " km";
+        return (mm / 1000000000).toFixed(2) + " 광년";
+    }
+
+    function checkUnitUpgrade(mm) {
+        if (currentTierIndex < unitTiers.length && mm >= unitTiers[currentTierIndex].limit) {
+            showCelebration(unitTiers[currentTierIndex].msg);
+            currentTierIndex++;
+        }
+    }
+
+    function showCelebration(message) {
+        celebrationMsg.innerText = message;
+        celebrationOverlay.classList.add('active');
+    }
+
+    function closeCelebration() {
+        celebrationOverlay.classList.remove('active');
+    }
+
+    function getClickPower() {
+        let total = baseClickGrowth;
+        upgrades.forEach(item => {
+            if (item.type === 'click') total += item.value * item.count;
+        });
+        return total;
+    }
+
+    function getAutoPower() {
+        let total = 0;
+        upgrades.forEach(item => {
+            if (item.type === 'auto') total += item.value * item.count;
+        });
+        return total;
+    }
+
+    function initShop() {
+        shopContainer.innerHTML = '';
+        upgrades.forEach((item, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'upgrade-btn';
+            btn.id = `upg-${index}`;
+            btn.onclick = () => buyUpgrade(index);
+            shopContainer.appendChild(btn);
+        });
+    }
+
+    function doClick() {
+        lengthInMm += getClickPower();
+        checkUnitUpgrade(lengthInMm);
+        updateUI();
+    }
+
+    function buyUpgrade(index) {
+        const item = upgrades[index];
+        if (lengthInMm >= item.cost) {
+            lengthInMm -= item.cost;
+            item.count++;
+            // 업그레이드할 때마다 가격 폭등 (1.85배)
+            item.cost = Math.floor(item.cost * 1.85);
+            updateUI();
+        }
+    }
+
+    function updateUI() {
+        lengthDisplay.innerText = formatLength(lengthInMm);
+        
+        const clickPwr = getClickPower();
+        const autoPwr = getAutoPower();
+        statsDisplay.innerText = `(클릭당: +${formatLength(clickPwr)} | 초당: +${formatLength(autoPwr)})`;
+
+        const maxBarHeight = 238;
+        const calculatedHeight = Math.min(maxBarHeight, Math.max(4, Math.log10(lengthInMm + 1) * 20));
+        fleshBar.style.height = `${calculatedHeight}px`;
+
+        upgrades.forEach((item, index) => {
+            const btn = document.getElementById(`upg-${index}`);
+            if (btn) {
+                btn.disabled = lengthInMm < item.cost;
+                const effectText = item.type === 'click' 
+                    ? `+ 클릭당 ${formatLength(item.value)}` 
+                    : `+ 초당 ${formatLength(item.value)}`;
+
+                btn.innerHTML = `
+                    <div class="upgrade-info">
+                        <span>업그레이드 #${item.id} [ 보유: ${item.count} ]</span>
+                        <span class="upgrade-sub">${effectText}</span>
+                    </div>
+                    <span>${formatLength(item.cost)}</span>
+                `;
+            }
+        });
+    }
+
+    let isTouch = false;
+
+    clickBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        isTouch = true;
+        doClick();
+    }, { passive: false });
+
+    clickBtn.addEventListener('mousedown', (e) => {
+        if (isTouch) {
+            isTouch = false;
+            return;
+        }
+        doClick();
+    });
+
+    setInterval(() => {
+        const autoPwr = getAutoPower();
+        if (autoPwr > 0) {
+            lengthInMm += autoPwr / 10;
+            checkUnitUpgrade(lengthInMm);
+            updateUI();
+        }
+    }, 100);
+
+    initShop();
+    updateUI();
+</script>
+
+</body>
+</html>
