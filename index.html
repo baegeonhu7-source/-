@@ -1,4 +1,4 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -428,6 +428,34 @@
 
     initShop();
     updateUI();
+    // 자동 저장 로직
+function saveGame() {
+  const gameData = {
+    length: lengthMM,
+    perClick: clickPower,
+    perSec: autoPower,
+    upgrades: typeof upgrades !== 'undefined' ? upgrades : []
+  };
+  localStorage.setItem('clickerSaveData', JSON.stringify(gameData));
+}
+
+function loadGame() {
+  const saved = localStorage.getItem('clickerSaveData');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.length !== undefined) lengthMM = data.length;
+      if (data.perClick !== undefined) clickPower = data.perClick;
+      if (data.perSec !== undefined) autoPower = data.perSec;
+      if (data.upgrades && typeof upgrades !== 'undefined') upgrades = data.upgrades;
+      updateUI();
+    } catch(e) {}
+  }
+}
+
+loadGame();
+setInterval(saveGame, 2000);
+
 </script>
 
 </body>
